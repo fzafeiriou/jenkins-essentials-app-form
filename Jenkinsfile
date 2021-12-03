@@ -18,7 +18,7 @@ pipeline {
             echo 'Getting Private Repo'
             git(
                url: 'git@github.com:fzafeiriou/jenkins-essentials-app-form.git',
-               credentialsId: '9d67ef61-99b1-4455-a07f-ca619089e32a',
+               credentialsId: 'jenkins-essentials-app-form-class',
                branch: 'master'
             )
 
