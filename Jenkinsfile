@@ -46,7 +46,19 @@ pipeline {
          }
       }
       
-stage('SonarQube Analysis') {
+      stage('Quality Gate') {
+         steps {
+            script {
+               // Run the maven build
+               withEnv(["MVN_HOME=$mvnHome"])
+               {
+                  waitForQualityGate abortPipeline: true
+               }
+            }
+         }
+      }
+
+      stage('SonarQube Analysis') {
          steps {
             script {
                // Run the maven build
@@ -72,7 +84,6 @@ stage('SonarQube Analysis') {
             }
          }
       }
-
       stage('Test Results') {
          steps {
             junit '**/target/surefire-reports/TEST-*.xml'
